@@ -1,5 +1,9 @@
-package Main;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Main;
 
 import controller.PagoServicioController;
 import java.util.List;
@@ -12,10 +16,6 @@ import model.entity.Cliente;
 import model.entity.ServicioLuz;
 import view.PagoServicioView;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 /**
  *
  * @author rober
@@ -29,16 +29,16 @@ public class MainPrincipal {
         PagoServicioController controller = new PagoServicioController(em);
 
         cargarDatosIniciales(em);
-        
+
         new PagoServicioView(controller).setVisible(true);
     }
-    
+
+    //En caso de haber datos ya existentes, no se agregan mas.
     private static void cargarDatosIniciales(EntityManager em) {
 
         ClienteDAO clienteDAO = new ClienteDAO(em);
         ServicioLuzDAO servicioDAO = new ServicioLuzDAO(em);
 
-        // Si ya existen clientes, no volver a insertar
         List<Cliente> existentes = em.createQuery("SELECT c FROM Cliente c", Cliente.class)
                 .getResultList();
 
